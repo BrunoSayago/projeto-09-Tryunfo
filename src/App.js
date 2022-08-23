@@ -12,6 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
+    cardsSaved: [],
   };
 
   handleChange = (event) => {
@@ -39,7 +40,23 @@ class App extends React.Component {
 
   verificaBotaoSalvar = (bool1, bool2) => bool1 && bool2;
 
-  vaidom = () => 2;
+  resetInfo = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+    });
+  };
+
+  salvaCarta = (objCarta) => {
+    const { cardsSaved: cartasSalvas } = this.state;
+    this.setState({ cardsSaved: [...cartasSalvas, objCarta] });
+    this.resetInfo();
+  };
 
   render() {
     const {
@@ -72,7 +89,7 @@ class App extends React.Component {
           //   hasTrunfo,
           isSaveButtonDisabled={ !this.verificaBotaoSalvar(bool1, bool2) }
           onInputChange={ this.handleChange }
-          onSaveButtonClick={ this.vaidom }
+          onSaveButtonClick={ this.salvaCarta }
         />
         <Card
           cardName={ cardName }
