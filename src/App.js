@@ -65,8 +65,19 @@ class App extends React.Component {
     });
   };
 
+  excluiCarta = (event) => {
+    const { target } = event;
+    const carta = target.parentElement;
+    const filhos = carta.children;
+    if (filhos[7].className === 'temTrunfo') {
+      this.setState({ hasTrunfo: false });
+    }
+    carta.remove();
+  };
+
   salvaCarta = (objCarta) => {
     const { cardsSaved: cartasSalvas } = this.state;
+    objCarta.cardOnList = true;
     this.setState({ cardsSaved: [...cartasSalvas, objCarta] });
     if (objCarta.cardTrunfo === true) {
       this.setState({ hasTrunfo: true });
@@ -118,6 +129,8 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          cardOnList={ false }
+          excluiCarta={ this.excluiCarta }
         />
         <div id="cards-salvos">
           {cardsSaved.map((elemento) => {
@@ -141,6 +154,8 @@ class App extends React.Component {
                 cardImage={ cardImageE }
                 cardRare={ cardRareE }
                 cardTrunfo={ cardTrunfoE }
+                cardOnList
+                excluiCarta={ this.excluiCarta }
               />
             );
           })}

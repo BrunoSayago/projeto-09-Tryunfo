@@ -11,15 +11,27 @@ class Card extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      cardOnList,
+      excluiCarta,
     } = this.props;
 
     const imprimeTrunfo = (trunfo) => {
       if (trunfo === true) {
         return (
-          <p data-testid="trunfo-card">Super Trunfo</p>
+          <p data-testid="trunfo-card" className="temTrunfo">Super Trunfo</p>
         );
       }
     };
+
+    const buttonExluir = (
+      <button
+        type="button"
+        onClick={ excluiCarta }
+        data-testid="delete-button"
+      >
+        Exluir
+      </button>
+    );
 
     return (
       <div>
@@ -31,6 +43,7 @@ class Card extends React.Component {
         <p data-testid="attr3-card">{cardAttr3}</p>
         <p data-testid="rare-card">{cardRare}</p>
         {imprimeTrunfo(cardTrunfo)}
+        { cardOnList ? buttonExluir : <p className="previa">Prévia</p> }
       </div>
     );
   }
@@ -45,6 +58,8 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  cardOnList: PropTypes.bool.isRequired,
+  excluiCarta: PropTypes.func.isRequired,
 };
 
 export default Card;
