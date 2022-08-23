@@ -12,8 +12,21 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
+    hasTrunfo: false,
     cardsSaved: [],
   };
+
+  // verificaHasTrunfo = () => {
+  //   const { cardsSaved } = this.state;
+  //   return (cardsSaved.some((elemento) => elemento.cardTrunfo === true));
+  // };
+
+  // setHasTrunfo = () => {
+  //   const { cardsSaved } = this.state;
+  //   if (cardsSaved.length > 0 && this.verificaHasTrunfo()) {
+  //     this.setState({ hasTrunfo: true });
+  //   }
+  // };
 
   handleChange = (event) => {
     const { target } = event;
@@ -55,6 +68,9 @@ class App extends React.Component {
   salvaCarta = (objCarta) => {
     const { cardsSaved: cartasSalvas } = this.state;
     this.setState({ cardsSaved: [...cartasSalvas, objCarta] });
+    if (objCarta.cardTrunfo === true) {
+      this.setState({ hasTrunfo: true });
+    }
     this.resetInfo();
   };
 
@@ -68,6 +84,8 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
+      // cardsSaved,
     } = this.state;
 
     const bool1 = this.verificaStrings(cardName, cardDescription, cardImage, cardRare);
@@ -86,7 +104,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          //   hasTrunfo,
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ !this.verificaBotaoSalvar(bool1, bool2) }
           onInputChange={ this.handleChange }
           onSaveButtonClick={ this.salvaCarta }
