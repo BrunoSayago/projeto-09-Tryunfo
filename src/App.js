@@ -85,7 +85,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
-      // cardsSaved,
+      cardsSaved,
     } = this.state;
 
     const bool1 = this.verificaStrings(cardName, cardDescription, cardImage, cardRare);
@@ -119,6 +119,32 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <div id="cards-salvos">
+          {cardsSaved.map((elemento) => {
+            const { cardName: cardNameE,
+              cardDescription: cardDescriptionE,
+              cardAttr1: cardAttr1E,
+              cardAttr2: cardAttr2E,
+              cardAttr3: cardAttr3E,
+              cardImage: cardImageE,
+              cardRare: cardRareE,
+              cardTrunfo: cardTrunfoE,
+            } = elemento;
+            return (
+              <Card
+                key={ cardNameE }
+                cardName={ cardNameE }
+                cardDescription={ cardDescriptionE }
+                cardAttr1={ cardAttr1E }
+                cardAttr2={ cardAttr2E }
+                cardAttr3={ cardAttr3E }
+                cardImage={ cardImageE }
+                cardRare={ cardRareE }
+                cardTrunfo={ cardTrunfoE }
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
