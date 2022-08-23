@@ -1,5 +1,7 @@
 import React from 'react';
 
+// INiciando projeto
+
 class App extends React.Component {
   render() {
     return (
