@@ -15,20 +15,9 @@ class App extends React.Component {
     hasTrunfo: false,
     cardsSaved: [],
     inputFilter: '',
-    selectFilter: '',
+    selectFilter: 'todas',
+    trunfoFilter: false,
   };
-
-  // verificaHasTrunfo = () => {
-  //   const { cardsSaved } = this.state;
-  //   return (cardsSaved.some((elemento) => elemento.cardTrunfo === true));
-  // };
-
-  // setHasTrunfo = () => {
-  //   const { cardsSaved } = this.state;
-  //   if (cardsSaved.length > 0 && this.verificaHasTrunfo()) {
-  //     this.setState({ hasTrunfo: true });
-  //   }
-  // };
 
   handleChange = (event) => {
     const { target } = event;
@@ -64,6 +53,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
     });
   };
 
@@ -100,6 +90,7 @@ class App extends React.Component {
       cardsSaved,
       inputFilter,
       selectFilter,
+      trunfoFilter,
     } = this.state;
 
     const bool1 = this.verificaStrings(cardName, cardDescription, cardImage, cardRare);
@@ -141,16 +132,18 @@ class App extends React.Component {
             name="inputFilter"
             id="filtro-input"
             data-testid="name-filter"
+            disabled={ trunfoFilter }
             onChange={ this.handleChange }
           />
         </label>
 
-        <label htmlFor="filtro-input">
+        <label htmlFor="rare-filter">
           Filtro por raridade:
           <select
             name="selectFilter"
             data-testid="rare-filter"
             id="rare-filter"
+            disabled={ trunfoFilter }
             onChange={ this.handleChange }
           >
             <option>todas</option>
@@ -160,6 +153,17 @@ class App extends React.Component {
           </select>
         </label>
 
+        <label htmlFor="trunfo-filter">
+          Filtro por Trunfo:
+          <input
+            type="checkbox"
+            name="trunfoFilter"
+            data-testid="trunfo-filter"
+            id="trunfo-filter"
+            onChange={ this.handleChange }
+          />
+        </label>
+
         <ul id="cards-salvos">
           {
             cardsSaved
@@ -167,6 +171,12 @@ class App extends React.Component {
               .filter((card) => {
                 if (selectFilter !== 'todas') {
                   return (card.cardRare === selectFilter);
+                }
+                return true;
+              })
+              .filter((card) => {
+                if (trunfoFilter) {
+                  return card.cardTrunfo === trunfoFilter;
                 }
                 return true;
               })
