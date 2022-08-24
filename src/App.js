@@ -15,6 +15,7 @@ class App extends React.Component {
     hasTrunfo: false,
     cardsSaved: [],
     inputFilter: '',
+    selectFilter: '',
   };
 
   // verificaHasTrunfo = () => {
@@ -98,6 +99,7 @@ class App extends React.Component {
       hasTrunfo,
       cardsSaved,
       inputFilter,
+      selectFilter,
     } = this.state;
 
     const bool1 = this.verificaStrings(cardName, cardDescription, cardImage, cardRare);
@@ -131,6 +133,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+
         <label htmlFor="filtro-input">
           Filtro por nome:
           <input
@@ -141,10 +144,32 @@ class App extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
+
+        <label htmlFor="filtro-input">
+          Filtro por raridade:
+          <select
+            name="selectFilter"
+            data-testid="rare-filter"
+            id="rare-filter"
+            onChange={ this.handleChange }
+          >
+            <option>todas</option>
+            <option>normal</option>
+            <option>raro</option>
+            <option>muito raro</option>
+          </select>
+        </label>
+
         <ul id="cards-salvos">
           {
             cardsSaved
               .filter((card) => card.cardName.includes(inputFilter))
+              .filter((card) => {
+                if (selectFilter !== 'todas') {
+                  return (card.cardRare === selectFilter);
+                }
+                return true;
+              })
               .map((card) => (
                 <li key={ card.cardName }>
                   <h2>{card.cardName}</h2>
