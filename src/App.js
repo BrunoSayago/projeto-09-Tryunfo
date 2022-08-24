@@ -60,12 +60,15 @@ class App extends React.Component {
 
   excluiCarta = (event) => {
     const { target } = event;
-    const carta = target.parentElement;
+    const li = target.parentElement;
+    const carta = li.firstChild;
     const filhos = carta.children;
-    if (filhos[7].className === 'temTrunfo') {
+    const limitWithTrunfo = 8;
+    if (filhos.length === limitWithTrunfo
+      && filhos[7].className === 'temTrunfo card-lendario') {
       this.setState({ hasTrunfo: false });
     }
-    carta.remove();
+    li.remove();
   };
 
   salvaCarta = (objCarta) => {
@@ -127,46 +130,50 @@ class App extends React.Component {
           />
         </section>
 
-        <label htmlFor="filtro-input">
-          Filtro por nome:
-          <input
-            type="text"
-            name="inputFilter"
-            id="filtro-input"
-            data-testid="name-filter"
-            disabled={ trunfoFilter }
-            onChange={ this.handleChange }
-          />
-        </label>
+        <h2 className="saved-title">Cards Salvos</h2>
+        <section className="filter-section">
+          <label htmlFor="filtro-input" className="filter-column filter-lab">
+            <span className="name-filter">Filtro por nome:</span>
+            <input
+              type="text"
+              name="inputFilter"
+              id="filtro-input"
+              data-testid="name-filter"
+              disabled={ trunfoFilter }
+              onChange={ this.handleChange }
+            />
+          </label>
 
-        <label htmlFor="rare-filter">
-          Filtro por raridade:
-          <select
-            name="selectFilter"
-            data-testid="rare-filter"
-            id="rare-filter"
-            disabled={ trunfoFilter }
-            onChange={ this.handleChange }
-          >
-            <option>todas</option>
-            <option>normal</option>
-            <option>raro</option>
-            <option>muito raro</option>
-          </select>
-        </label>
+          <label htmlFor="rare-filter" className="filter-column filter-lab">
+            <span className="rare-filter">Filtro por raridade:</span>
+            <select
+              name="selectFilter"
+              data-testid="rare-filter"
+              id="rare-filter"
+              disabled={ trunfoFilter }
+              onChange={ this.handleChange }
+            >
+              <option>todas</option>
+              <option>normal</option>
+              <option>raro</option>
+              <option>muito raro</option>
+            </select>
+          </label>
 
-        <label htmlFor="trunfo-filter">
-          Filtro por Trunfo:
-          <input
-            type="checkbox"
-            name="trunfoFilter"
-            data-testid="trunfo-filter"
-            id="trunfo-filter"
-            onChange={ this.handleChange }
-          />
-        </label>
+          <label htmlFor="trunfo-filter" className="filter-lab trunfo-filt-lab">
+            <span className="span-trunfo-filter">Filtro por Trunfo:</span>
+            <input
+              type="checkbox"
+              name="trunfoFilter"
+              data-testid="trunfo-filter"
+              id="trunfo-filter"
+              className="check-trunfo-filter"
+              onChange={ this.handleChange }
+            />
+          </label>
+        </section>
 
-        <ul id="cards-salvos">
+        <ul id="cards-salvos" className="card-container">
           {
             cardsSaved
               .filter((card) => card.cardName.includes(inputFilter))
@@ -183,18 +190,39 @@ class App extends React.Component {
                 return true;
               })
               .map((card) => (
-                <li key={ card.cardName }>
-                  <h2>{card.cardName}</h2>
-                  <img src={ card.cardImage } alt={ card.cardName } />
-                  <p>{card.cardDescription}</p>
-                  <p>{card.cardAttr1}</p>
-                  <p>{card.cardAttr2}</p>
-                  <p>{card.cardAttr3}</p>
-                  <p>{card.cardRare}</p>
-                  {
-                    card.cardTrunfo && <p className="temTrunfo">Super Trunfo</p>
-                  }
+                <li className="li-cardlist" key={ card.cardName }>
+                  <section className="card-in-card-list">
+                    <h2 className="card-name">{card.cardName}</h2>
+                    <img
+                      className="img-card"
+                      src={ card.cardImage }
+                      alt={ card.cardName }
+                    />
+                    <span className="card-description">{card.cardDescription}</span>
+                    <div className="attr-card-div attr-card-arcano">
+                      <span className="span-attr-card">Arcano:</span>
+                      <p>{card.cardAttr1}</p>
+                    </div>
+
+                    <div className="attr-card-div attr-card-forca">
+                      <span className="span-attr-card">Força:</span>
+                      <p>{card.cardAttr2}</p>
+                    </div>
+
+                    <div className="attr-card-div attr-card-destreza">
+                      <span className="span-attr-card">Destreza:</span>
+                      <p>{card.cardAttr3}</p>
+                    </div>
+
+                    <p className="card-rare">{card.cardRare}</p>
+                    {
+                      card.cardTrunfo
+                      && <p className="temTrunfo card-lendario">Super Trunfo</p>
+                    }
+                  </section>
+
                   <button
+                    className="delete-button"
                     type="button"
                     onClick={ this.excluiCarta }
                     data-testid="delete-button"
