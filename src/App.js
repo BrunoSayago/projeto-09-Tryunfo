@@ -14,6 +14,7 @@ class App extends React.Component {
     cardTrunfo: false,
     hasTrunfo: false,
     cardsSaved: [],
+    inputFilter: '',
   };
 
   // verificaHasTrunfo = () => {
@@ -77,7 +78,6 @@ class App extends React.Component {
 
   salvaCarta = (objCarta) => {
     const { cardsSaved: cartasSalvas } = this.state;
-    objCarta.cardOnList = true;
     this.setState({ cardsSaved: [...cartasSalvas, objCarta] });
     if (objCarta.cardTrunfo === true) {
       this.setState({ hasTrunfo: true });
@@ -97,6 +97,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       cardsSaved,
+      inputFilter,
     } = this.state;
 
     const bool1 = this.verificaStrings(cardName, cardDescription, cardImage, cardRare);
@@ -129,37 +130,44 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          cardOnList={ false }
-          excluiCarta={ this.excluiCarta }
         />
-        <div id="cards-salvos">
-          {cardsSaved.map((elemento) => {
-            const { cardName: cardNameE,
-              cardDescription: cardDescriptionE,
-              cardAttr1: cardAttr1E,
-              cardAttr2: cardAttr2E,
-              cardAttr3: cardAttr3E,
-              cardImage: cardImageE,
-              cardRare: cardRareE,
-              cardTrunfo: cardTrunfoE,
-            } = elemento;
-            return (
-              <Card
-                key={ cardNameE }
-                cardName={ cardNameE }
-                cardDescription={ cardDescriptionE }
-                cardAttr1={ cardAttr1E }
-                cardAttr2={ cardAttr2E }
-                cardAttr3={ cardAttr3E }
-                cardImage={ cardImageE }
-                cardRare={ cardRareE }
-                cardTrunfo={ cardTrunfoE }
-                cardOnList
-                excluiCarta={ this.excluiCarta }
-              />
-            );
-          })}
-        </div>
+        <label htmlFor="filtro-input">
+          Filtro por nome:
+          <input
+            type="text"
+            name="inputFilter"
+            id="filtro-input"
+            data-testid="name-filter"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <ul id="cards-salvos">
+          {
+            cardsSaved
+              .filter((card) => card.cardName.includes(inputFilter))
+              .map((card) => (
+                <li key={ card.cardName }>
+                  <h2>{card.cardName}</h2>
+                  <img src={ card.cardImage } alt={ card.cardName } />
+                  <p>{card.cardDescription}</p>
+                  <p>{card.cardAttr1}</p>
+                  <p>{card.cardAttr2}</p>
+                  <p>{card.cardAttr3}</p>
+                  <p>{card.cardRare}</p>
+                  {
+                    card.cardTrunfo && <p className="temTrunfo">Super Trunfo</p>
+                  }
+                  <button
+                    type="button"
+                    onClick={ this.excluiCarta }
+                    data-testid="delete-button"
+                  >
+                    Exluir
+                  </button>
+                </li>
+              ))
+          }
+        </ul>
       </div>
     );
   }
