@@ -18,8 +18,8 @@ class Form extends React.Component {
     } = this.props;
 
     const checkbox = (
-      <label htmlFor="trunfo-input">
-        Trunfo
+      <label htmlFor="trunfo-input" className="trunfo-lab">
+        <span className="span-trunfo">Carta Lendária</span>
         <input
           type="checkbox"
           data-testid="trunfo-input"
@@ -32,7 +32,8 @@ class Form extends React.Component {
     );
 
     return (
-      <form>
+      <form className="main-form">
+        <h1 className="main-form-title">Adicionar nova carta</h1>
         <label htmlFor="name-input">
           Nome
           <input
@@ -47,7 +48,7 @@ class Form extends React.Component {
 
         <label htmlFor="description-input">
           Descrição
-          <input
+          <textarea
             type="textarea"
             data-testid="description-input"
             name="cardDescription"
@@ -57,37 +58,40 @@ class Form extends React.Component {
           />
         </label>
 
-        <label htmlFor="attr1-input">
-          Attr1
+        <label htmlFor="attr1-input" className="side-lab attr">
+          <span className="attr-span">Arcano</span>
           <input
             type="number"
             data-testid="attr1-input"
             name="cardAttr1"
             id="attr1-input"
+            className="attr-input"
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
         </label>
 
-        <label htmlFor="attr2-input">
-          Attr2
+        <label htmlFor="attr2-input" className="side-lab attr">
+          <span className="attr-span">Força</span>
           <input
             type="number"
             data-testid="attr2-input"
             name="cardAttr2"
             id="attr2-input"
+            className="attr-input"
             value={ cardAttr2 }
             onChange={ onInputChange }
           />
         </label>
 
-        <label htmlFor="attr3-input">
-          Attr3
+        <label htmlFor="attr3-input" className="side-lab attr">
+          <span className="attr-span">Destreza</span>
           <input
             type="number"
             data-testid="attr3-input"
             name="cardAttr3"
             id="attr3-input"
+            className="attr-input"
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
@@ -105,8 +109,8 @@ class Form extends React.Component {
           />
         </label>
 
-        <label htmlFor="rare-input">
-          Raridade
+        <label htmlFor="rare-input" className="side-lab">
+          <span className="span-rare">Raridade</span>
           <select
             data-testid="rare-input"
             name="cardRare"
@@ -122,17 +126,6 @@ class Form extends React.Component {
         {
           hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p> : checkbox
         }
-        {/* <label htmlFor="trunfo-input">
-          Trunfo
-          <input
-            type="checkbox"
-            data-testid="trunfo-input"
-            name="cardTrunfo"
-            id="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
-        </label> */}
 
         <button
           data-testid="save-button"
