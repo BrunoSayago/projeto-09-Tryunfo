@@ -1,13 +1,32 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Projeto 09 - Tryunfo
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Oi. Este foi um dos projetos que eu fiz durante meu curso na Trybe. Confira os detalhes dele abaixo.
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+
+
+
+## Nome do Projeto
+Tryunfo (Carrinho de Compras)
+## Linguagens e Ferramentas Utilizadas
+
+ - JavaScript
+ - HTML
+ - CSS
+ - [Biblioteca React](https://pt-br.reactjs.org/)
+
+
+## Objetivos do Projeto
+Neste projeto foi desenvolvido uma aplicação que permite a pessoa usuária criar uma carta, no estilo das cartas do popular jogo "Trunfo". Além disso, as cartas criadas ficam salvas, e podem ser filtradas pela pessoa usuária. O intuito do projeto foi aplicar os conhecimentos adquiridos acerca dos componentes com estado e eventos, do React, e também a manipulação de formulários com a biblioteca.
+
+![Screenshot](screenshot1.gif)
+![Screenshot](screenshot2.gif)
+
+## Instruções para visualização
+Comando para clonar o projeto:
+ - `git clone git@github.com:BrunoSayago/projeto-09-Tryunfo.git`
+ 
+Se necessário, instalar as dependências:
+ - `npm install`
+  
+O projeto pode ser visualizado no navegador utilizando o comando:
+- `npm start`
