@@ -18,8 +18,8 @@ Tryunfo (Carrinho de Compras)
 ## Objetivos do Projeto
 Neste projeto foi desenvolvido uma aplicação que permite a pessoa usuária criar uma carta, no estilo das cartas do popular jogo "Trunfo". Além disso, as cartas criadas ficam salvas, e podem ser filtradas pela pessoa usuária. O intuito do projeto foi aplicar os conhecimentos adquiridos acerca dos componentes com estado e eventos, do React, e também a manipulação de formulários com a biblioteca.
 
-![Screenshot](screenshot1.png)
-![Screenshot](screenshot2.png)
+![Screenshot1](screenshot1.png)
+![Screenshot2](screenshot2.png)
 
 ## Instruções para visualização
 Comando para clonar o projeto:
